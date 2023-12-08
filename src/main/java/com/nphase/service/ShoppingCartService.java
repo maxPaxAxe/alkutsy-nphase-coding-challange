@@ -3,7 +3,6 @@ package com.nphase.service;
 import com.nphase.entity.Product;
 import com.nphase.entity.ShoppingCart;
 
-import javax.naming.OperationNotSupportedException;
 import java.math.BigDecimal;
 
 public class ShoppingCartService {
@@ -12,12 +11,12 @@ public class ShoppingCartService {
     public BigDecimal calculateTotalPrice(ShoppingCart shoppingCart) {
         return shoppingCart.getProducts()
                 .stream()
-                .map(product ->)
+                .map(this::calculateDiscount)
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);
     }
 
-    BigDecimal calculate(Product product) {
+    BigDecimal calculateDiscount(Product product) {
 
         BigDecimal res = product.getPricePerUnit().multiply(BigDecimal.valueOf(product.getQuantity()));
         if (product.getQuantity() >= 3) {
