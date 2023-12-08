@@ -16,12 +16,13 @@ public class ShoppingCartService {
                 .orElse(BigDecimal.ZERO);
     }
 
-    BigDecimal calculateDiscount(Product product) {
-
+    private BigDecimal calculateDiscount(Product product) {
         BigDecimal res = product.getPricePerUnit().multiply(BigDecimal.valueOf(product.getQuantity()));
+        
         if (product.getQuantity() >= 3) {
             res = res.multiply(bigDecimal);
         }
+        
         return res;
     }
 }
